@@ -14,6 +14,7 @@ class Lexer {
 
         void makeSingleLineCommentToken(std::vector<Token> &tokens, TokenType &tokenType);
         void makeMultiLineCommentToken(std::vector<Token> &tokens, TokenType &tokenType);
+        void makeBlockToken(std::vector<Token> &tokens, TokenType &tokenType, std::string &tokenValue);
         void makeNumberToken(std::vector<Token> &tokens, TokenType &tokenType, std::string &tokenValue);
         void makeStringToken(std::vector<Token> &tokens, TokenType &tokenType, std::string &tokenValue);
         void makeOperatorToken(std::vector<Token> &tokens, TokenType &tokenType, std::string &tokenValue);

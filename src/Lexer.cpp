@@ -1,4 +1,5 @@
 #include "../include/Lexer.hpp"
+#include <cstdio>
 
 std::vector<Token> Lexer::tokenizer(std::string inText)
 {
@@ -34,6 +35,36 @@ std::vector<Token> Lexer::tokenizer(std::string inText)
                 else {
                     this->makeOperatorToken(tokens, tokenType, tokenValue);
                 }
+
+                break;
+            }
+
+            case '(':
+            case ')': {
+                tokenValue = *this->currentChar;
+                tokenType = tokenValue == "(" ? L_PAREN : R_PAREN;
+
+                this->makeBlockToken(tokens, tokenType, tokenValue);
+
+                break;
+            }
+
+            case '[':
+            case ']': {
+                tokenValue = *this->currentChar;
+                tokenType = tokenValue == "[" ? L_BRACKET : R_BRACKET;
+
+                this->makeBlockToken(tokens, tokenType, tokenValue);
+
+                break;
+            }
+
+            case '{':
+            case '}': {
+                tokenValue = *this->currentChar;
+                tokenType = tokenValue == "{" ? L_BRACE : R_BRACE;
+
+                this->makeBlockToken(tokens, tokenType, tokenValue);
 
                 break;
             }
@@ -83,7 +114,7 @@ std::vector<Token> Lexer::tokenizer(std::string inText)
             default: {
                 tokenType = IDENTIFIER;
 
-                while (*this->currentChar != ' ') {
+                while (*this->currentChar != ' ' && *this->currentChar != '(' && *this->currentChar != ')' && *this->currentChar != EOF) {
                     tokenValue.append(1, *this->currentChar);
 
                     this->advance();
@@ -93,7 +124,7 @@ std::vector<Token> Lexer::tokenizer(std::string inText)
 
                 this->endToken(tokenType, tokenValue);
 
-                this->advance();
+                /* this->advance(); */
 
                 break;
             }
@@ -107,7 +138,7 @@ void Lexer::makeSingleLineCommentToken(std::vector<Token> &tokens, TokenType &to
 {
     tokenType = COMMENT;
 
-    while (*this->currentChar != '\n') {
+    while (*this->currentChar != '\n' && *this->currentChar != EOF) {
         this->advance();
     }
 }
@@ -124,7 +155,7 @@ void Lexer::makeMultiLineCommentToken(std::vector<Token> &tokens, TokenType &tok
         this->advance();
     }
 
-    while (true) {
+    while (*this->currentChar != EOF) {
         if (*this->currentChar == '-') {
             ++incrementor;
         }
@@ -139,13 +170,22 @@ void Lexer::makeMultiLineCommentToken(std::vector<Token> &tokens, TokenType &tok
     this->advance();
 }
 
+void Lexer::makeBlockToken(std::vector<Token> &tokens, TokenType &tokenType, std::string &tokenValue)
+{
+    tokens.push_back(Token(tokenType, tokenValue));
+
+    this->endToken(tokenType, tokenValue);
+
+    this->advance();
+}
+
 void Lexer::makeNumberToken(std::vector<Token> &tokens, TokenType &tokenType, std::string &tokenValue)
 {
     tokenType = INTEGER_LITERAL;
 
     int numFloatingPoint = 0;
 
-    while ((std::isdigit(*this->currentChar) || *this->currentChar == '.')) {
+    while ((std::isdigit(*this->currentChar) || *this->currentChar == '.') && *this->currentChar != EOF) {
         tokenValue.append(1, *this->currentChar);
 
         if (numFloatingPoint > 1) {
@@ -174,7 +214,7 @@ void Lexer::makeStringToken(std::vector<Token> &tokens, TokenType &tokenType, st
 
     this->advance();
 
-    while (*this->currentChar != '"') {
+    while (*this->currentChar != '"' && *this->currentChar != EOF) {
         if (*this->currentChar == '\\') {
             tokenValue.append(1, *this->currentChar);
 
