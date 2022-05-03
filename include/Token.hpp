@@ -54,6 +54,16 @@ class Token {
         {
         }
 
+        TokenType getType()
+        {
+            return this->type;
+        }
+
+        std::string getValue()
+        {
+            return this->value;
+        }
+
         void debugLog();
 };
 
