@@ -1,5 +1,5 @@
-#ifndef _TOKEN_HPP_
-#define _TOKEN_HPP_
+#ifndef TOKEN_HPP
+#define TOKEN_HPP
 
 #include <iostream>
 #include <string>

@@ -1,5 +1,5 @@
-#ifndef _LEXER_HPP_
-#define _LEXER_HPP_
+#ifndef LEXER_HPP
+#define LEXER_HPP
 
 #include "Token.hpp"
 
