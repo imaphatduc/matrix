@@ -124,12 +124,19 @@ std::vector<Token> Lexer::tokenizer(std::string inText)
 
                 this->endToken(tokenType, tokenValue);
 
-                /* this->advance(); */
-
                 break;
             }
         }
     }
+
+    tokenType = EOFL;
+    tokenValue = *this->currentChar;
+
+    tokens.push_back(Token(tokenType, tokenValue));
+
+    this->endToken(tokenType, tokenValue);
+
+    this->advance();
 
     return tokens;
 }
@@ -141,6 +148,8 @@ void Lexer::makeSingleLineCommentToken(std::vector<Token> &tokens, TokenType &to
     while (*this->currentChar != '\n' && *this->currentChar != EOF) {
         this->advance();
     }
+
+    this->advance();
 }
 
 void Lexer::makeMultiLineCommentToken(std::vector<Token> &tokens, TokenType &tokenType)
@@ -167,6 +176,7 @@ void Lexer::makeMultiLineCommentToken(std::vector<Token> &tokens, TokenType &tok
         this->advance();
     }
 
+    this->advance();
     this->advance();
 }
 
