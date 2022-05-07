@@ -6,6 +6,7 @@
 
 enum TokenType {
     WHITESPACE,
+    EOFL,
     COMMENT,
     L_PAREN,
     R_PAREN,
@@ -25,6 +26,7 @@ enum TokenType {
 
 static const std::string sTokenType[] {
     "WHITESPACE",
+    "EOFL",
     "COMMENT",
     "L_PAREN",
     "R_PAREN",
