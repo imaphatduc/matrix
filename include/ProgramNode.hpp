@@ -16,10 +16,10 @@ class ProgramNode : public AstNode {
         {
         }
 
-        /* std::vector<std::unique_ptr<StatementNode>> getStatementNodes() */
-        /* { */
-        /*     return this->statementNodes; */
-        /* } */
+        std::vector<std::unique_ptr<StatementNode>> const &getStatementNodes() const
+        {
+            return this->statementNodes;
+        }
 
         void addStatementNode(std::unique_ptr<StatementNode> statementNode);
 
