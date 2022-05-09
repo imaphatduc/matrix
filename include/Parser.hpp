@@ -29,7 +29,7 @@ class Parser {
         std::vector<Token>::iterator currentToken;
 
     public:
-        void parse(std::vector<Token> tokens);
+        std::unique_ptr<ProgramNode> parse(std::vector<Token> tokens);
 
         std::unique_ptr<ProgramNode> parseProgramNode(std::vector<Token> tokens);
         std::unique_ptr<StatementNode> parseStatementNode();

@@ -1,10 +1,10 @@
 #include "../include/Parser.hpp"
 
-void Parser::parse(std::vector<Token> tokens)
+std::unique_ptr<ProgramNode> Parser::parse(std::vector<Token> tokens)
 {
     this->currentToken = tokens.begin();
 
-    this->parseProgramNode(tokens);
+    return this->parseProgramNode(tokens);
 }
 
 std::unique_ptr<ProgramNode> Parser::parseProgramNode(std::vector<Token> tokens)
