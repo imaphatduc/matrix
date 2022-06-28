@@ -6,6 +6,7 @@
 #include "IntegerNode.hpp"
 #include "ProgramNode.hpp"
 #include "StatementNode.hpp"
+#include "VariableExprNode.hpp"
 #include <iostream>
 
 class Visitor {
@@ -15,6 +16,7 @@ class Visitor {
         virtual void visit(IntegerNode *node);
         virtual void visit(DoubleNode *node);
         virtual void visit(BinaryExprNode *node);
+        virtual void visit(VariableExprNode *node);
 };
 
 #endif
