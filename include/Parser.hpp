@@ -9,6 +9,7 @@
 #include "ProgramNode.hpp"
 #include "StatementNode.hpp"
 #include "Token.hpp"
+#include "VariableExprNode.hpp"
 #include <iostream>
 #include <iterator>
 #include <map>
@@ -38,6 +39,8 @@ class Parser {
 
         void makeBinaryExprNode(std::stack<std::unique_ptr<ExprNode>> &operandStack, std::stack<char> &operatorStack);
         std::unique_ptr<ExprNode> parseBinaryExprNode();
+
+        std::unique_ptr<VariableExprNode> parseVariableExprNode();
 
         int getTokPrecedence();
 

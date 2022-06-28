@@ -145,6 +145,13 @@ std::unique_ptr<ExprNode> Parser::parseBinaryExprNode()
     return exprNode;
 }
 
+std::unique_ptr<VariableExprNode> Parser::parseVariableExprNode()
+{
+    std::string varName = this->currentToken->getValue();
+
+    return std::make_unique<VariableExprNode>(varName, 0);
+}
+
 int Parser::getTokPrecedence()
 {
     char currentTokValue = *this->currentToken->getValue().data();
