@@ -21,3 +21,7 @@ void Visitor::visit(DoubleNode *node)
 void Visitor::visit(BinaryExprNode *node)
 {
 }
+
+void Visitor::visit(VariableExprNode *node)
+{
+}
